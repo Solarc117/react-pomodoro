@@ -7,8 +7,8 @@ Allows the user to set the length of:
 - Short breaks (between focus sessions, in the same cycle)
 - Long breaks (between cycles)
 
-As well as:
-- The number of focus sessions per pomodoro cycle
-- The number of cycles they wish to complete
+As well as the number of:
+- Focus sessions per pomodoro cycle
+- Cycles total
 
 Provides an audio notification upon a session or break end. 
