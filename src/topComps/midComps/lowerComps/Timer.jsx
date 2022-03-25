@@ -17,7 +17,6 @@ export default function Timer({
     [cyclesLeft, setCyclesLeft],
   ] = ['', 0, numSessions, numCycles].map(v => useState(v))
 
-  // @ts-ignore
   useEffect(async () => {
     let sessionsRemaining = sessionsLeft,
       cyclesRemaining = cyclesLeft,
@@ -35,11 +34,11 @@ export default function Timer({
           const count = setInterval(() => {
             try {
               // secondsLeft is not updated within the useEffect function (not sure why), so this is why we also need to mutate the seconds argument passed on top of decrementing secondsLeft by 1 - the former is to know when to stop the timer, the latter is to render the correct value in the UI.
-              // @ts-ignore
+
               seconds--
               setSecondsLeft(s => s - 1)
               if (seconds <= 0) {
-                // new Audio('../../../../audio/notification.mp3').play()
+                new Audio('../../../../audio/notification.mp3').play()
                 setMessage(endMessage)
                 resolve(`${sessionType} finished.`)
                 clearInterval(count)
