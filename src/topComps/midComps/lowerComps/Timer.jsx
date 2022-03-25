@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect } from 'react'
 
 export default function Timer({
   settings: {
@@ -34,7 +34,6 @@ export default function Timer({
           const count = setInterval(() => {
             try {
               // secondsLeft is not updated within the useEffect function (not sure why), so this is why we also need to mutate the seconds argument passed on top of decrementing secondsLeft by 1 - the former is to know when to stop the timer, the latter is to render the correct value in the UI.
-
               seconds--
               setSecondsLeft(s => s - 1)
               if (seconds <= 0) {
@@ -47,7 +46,7 @@ export default function Timer({
               reject(err)
               clearInterval(count)
             }
-          }, 50)
+          }, 1000)
         })
         return countdown
       } catch (err) {
@@ -102,9 +101,11 @@ export default function Timer({
     <div className='timer'>
       <p className='currentTime'>{formatSecs(secondsLeft)}</p>
       <p className='currentActivity'>{currentActivity}</p>
-      <p className='currentSession'>
-        Session {numSessions - sessionsLeft + 1} of {numSessions}
-      </p>
+      {currentActivity === 'Focus session' && (
+        <p className='currentSession'>
+          Session {numSessions - sessionsLeft + 1} of {numSessions}
+        </p>
+      )}
       <p className='currentCycle'>
         Cycle {numCycles - cyclesLeft + 1} of {numCycles}
       </p>
